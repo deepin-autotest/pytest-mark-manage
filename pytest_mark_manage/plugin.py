@@ -25,6 +25,10 @@ def walk_apps(walk_dir):
                 csv_path_dict[os.path.splitext(file)[0]] = f"{root}/{file}"
     return csv_path_dict, no_youqu_mark
 
+def pytest_addoption(parser):
+    parser.addoption("--noskip", action="store", default="", help="skip-xxx标签不生效")
+    parser.addoption("--ifixed", action="store", default="", help="fixed-xxx标签不生效")
+
 
 def pytest_collection_modifyitems(session):
     csv_path_dict, no_youqu_mark = walk_apps(session.startdir)

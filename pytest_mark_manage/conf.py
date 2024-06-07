@@ -35,6 +35,10 @@ class ConfStr(Enum):
     FAILED = "failed"
     SKIPPED = "skipped"
     REMOVED = "removed"
+    SKIP_INDEX = "skip_index"
+    FIXED_INDEX = "fixed_index"
+    REMOVED_INDEX = "removed_index"
+    PMS_ID_INDEX = "pms_id_index"
 
 
 @unique
