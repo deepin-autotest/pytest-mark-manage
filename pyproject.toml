@@ -18,6 +18,9 @@ license = { text = "GPL2.0" }
 
 [project.scripts]
 
+[project.entry-points.pytest11]
+pytest-mark-manage = "pytest_mark_manage.__init__.py"
+
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
