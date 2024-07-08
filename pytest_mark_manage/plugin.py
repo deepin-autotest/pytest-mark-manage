@@ -2,7 +2,7 @@ import os
 import re
 
 from _pytest.mark import Mark
-from funnylog import logger
+from funnylog2 import logger
 
 from pytest_mark_manage.conf import ConfStr, FixedCsvTitle
 from pytest_mark_manage import skipif
