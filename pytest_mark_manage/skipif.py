@@ -57,7 +57,7 @@ def skipif_cpu_name(args: str):
     for key in _skip_key:
         if (
                 os.popen(
-                    f"echo '{GlobalConfig.PASSWORD}'| "
+                    f"echo '{conf.PASSWORD}'| "
                     "sudo -S dmidecode -s system-product-name | awk '{print $NF}'"
                 )
                         .read()
@@ -86,7 +86,7 @@ def skipif_os_version(args: str):
     """
     _skip_key = args.split("&")
     for key in _skip_key:
-        if key == GlobalConfig.version_cfg.get("MinorVersion"):
+        if key == conf.version_cfg.get("MinorVersion"):
             return True
     return False
 
@@ -101,7 +101,7 @@ def skipif_not_os_version(args: str):
 
 if __name__ == '__main__':
     a = os.popen(
-        f"echo '{GlobalConfig.PASSWORD}'| "
+        f"echo '{conf.PASSWORD}'| "
         "sudo -S dmidecode -s system-product-name | awk '{print $NF}'"
     ).read().split("\n")[0]
     print(a)

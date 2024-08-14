@@ -2,6 +2,30 @@ import os
 import platform
 
 from enum import unique, Enum
+from configparser import RawConfigParser
+
+class GetCfg:
+    """Gets the value in the configuration file"""
+
+    def __init__(self, config_file: str, option: [str, None] = None):
+        self.config_file = config_file
+        self.option = option
+        self.conf = RawConfigParser()
+        self.conf.read(self.config_file, encoding="utf-8")
+
+    def get(self, key: str, op: [str, None] = None, default=None) -> str:
+        if op is None and self.option is not None:
+            op = self.option
+        if op is None and self.option is None:
+            raise ValueError("option is None")
+        return self.conf.get(op, key, fallback=default)
+
+    def get_bool(self, key: str, op: [str, None] = None, default=False) -> bool:
+        if op is None and self.option is not None:
+            op = self.option
+        if op is None and self.option is None:
+            raise ValueError("option is None")
+        return self.conf.getboolean(op, key, fallback=default)
 
 
 class DisplayServer:
@@ -21,6 +45,14 @@ class _Config:
 
     IS_X11: bool = DISPLAY_SERVER == DisplayServer.x11
     IS_WAYLAND: bool = DISPLAY_SERVER == DisplayServer.wayland
+
+    VERSION = ""
+    if os.path.exists("/etc/os-version"):
+        version_cfg = GetCfg("/etc/os-version", "Version")
+        VERSION = (version_cfg.get("EditionName[zh_CN]") or "") + (
+                version_cfg.get("MinorVersion") or ""
+        )
+    PASSWORD = "1"
 
 
 conf = _Config()
