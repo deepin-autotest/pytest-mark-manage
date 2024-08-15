@@ -185,4 +185,4 @@ def pytest_collection_modifyitems(session):
                     logger.error(f"<{item.name}> csv文件中未标记,强制跳过")
                     session.items.remove(item)
 
-        print()  # 处理日志换行
+    print()  # 处理日志换行
